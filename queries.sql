@@ -2,12 +2,12 @@ USE Detailist;
 
 # List all customers and their email addresses.
 
-SELECT name AS 'Name', email AS 'Email'
+SELECT name AS Name, email AS Email
 FROM Kunde;
 
 # Show all articles with their current stock and minimum stock.
 
-SELECT bestand AS 'Bestand', mindestbestand AS 'Mindestbestand'
+SELECT bestand AS Bestand, mindestbestand AS Mindestbestand
 FROM Artikel;
 # SELECT COUNT(*) AS 'Anzahl Artikel' FROM Artikel;
 
@@ -18,7 +18,7 @@ FROM Bestellung;
 
 # List all order positions (Bestellposition) for a specific order, including article name and quantity.
 
-SELECT bp.bestell_nr AS 'BestellNr', a.bezeichnung AS 'Artikelname', bp.menge AS 'Bestellmenge'
+SELECT bp.bestell_nr AS BestellNr, a.bezeichnung AS Artikelname, bp.menge AS Bestellmenge
 FROM Bestellposition bp
 JOIN Artikel a ON bp.artikel_nr = a.artikel_nr
 WHERE bp.bestell_nr = 1;
@@ -47,7 +47,7 @@ WHERE liefer_datum IS NULL;
 
 # Show the total quantity ordered for each article.
 
-SELECT a.artikel_nr as "ArtikelNr", COUNT(bp.artikel_nr) as "Bestelltotal"
+SELECT a.artikel_nr as ArtikelNr, COUNT(bp.artikel_nr) as Bestelltotal
 FROM Artikel a
 LEFT JOIN Bestellposition bp ON a.artikel_nr = bp.artikel_nr
 GROUP BY a.artikel_nr;
