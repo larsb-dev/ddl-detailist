@@ -3,50 +3,56 @@ CREATE DATABASE Detailist;
 USE Detailist;
 
 CREATE TABLE MWStSatz (
-    mwst_art INT PRIMARY KEY AUTO_INCREMENT,
-    mwst_satz DECIMAL(3, 2) NOT NULL
+    mwst_art INT AUTO_INCREMENT,
+    mwst_satz DECIMAL(3, 2) NOT NULL,
+    PRIMARY KEY (mwst_art)
 );
 
 CREATE TABLE Kunde (
-    kunden_nr INT PRIMARY KEY AUTO_INCREMENT,
+    kunden_nr INT AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     adresse VARCHAR(500) NOT NULL,
     telefon VARCHAR(20),
-    email VARCHAR(100)
+    email VARCHAR(100),
+    PRIMARY KEY (kunden_nr)
 );
 
 CREATE TABLE Artikel (
-    artikel_nr INT PRIMARY KEY AUTO_INCREMENT,
+    artikel_nr INT AUTO_INCREMENT,
     art_mwst INT NOT NULL,
     bezeichnung VARCHAR(500) NOT NULL,
     listenpreis DECIMAL(10, 2) NOT NULL,
     bestand INT NOT NULL,
     mindestbestand INT NOT NULL,
+    PRIMARY KEY (artikel_nr),
     FOREIGN KEY (art_mwst) REFERENCES MWStSatz(mwst_art)
 );
 
 CREATE TABLE Bestellung (
-    bestell_nr INT PRIMARY KEY AUTO_INCREMENT,
+    bestell_nr INT AUTO_INCREMENT,
     kunden_nr INT NOT NULL,
     bestell_datum DATE NOT NULL,
     liefer_datum DATE,
+    PRIMARY KEY (bestell_nr),
     FOREIGN KEY (kunden_nr) REFERENCES Kunde(kunden_nr)
 );
 
 CREATE TABLE Bestellposition (
-    bestellpos_nr INT PRIMARY KEY AUTO_INCREMENT,
+    bestellpos_nr INT AUTO_INCREMENT,
     bestell_nr INT NOT NULL,
     artikel_nr INT NOT NULL,
     menge INT NOT NULL,
+    PRIMARY KEY (bestellpos_nr),
     FOREIGN KEY (bestell_nr) REFERENCES Bestellung(bestell_nr),
     FOREIGN KEY (artikel_nr) REFERENCES Artikel(artikel_nr)
 );
 
 CREATE TABLE Girokonto (
-    giro_nr INT PRIMARY KEY AUTO_INCREMENT,
+    giro_nr INT AUTO_INCREMENT,
     kunden_nr INT NOT NULL,
     iban VARCHAR(34) NOT NULL,
     bic VARCHAR(11) NOT NULL,
+    PRIMARY KEY (giro_nr),
     FOREIGN KEY (kunden_nr) REFERENCES Kunde(kunden_nr)
 );
 
